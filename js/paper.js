@@ -72,10 +72,18 @@
       } else {
         w.misses++;
         w.missOn++;
-        w.lastWhy = r.why;
         w.fades.push({ path, t: 0 });
         let other = null;
         if (r.why === 'other') other = r.which < w.i ? r.which : r.which + 1;
+        else {
+          // a good copy of a different stroke: right stroke, wrong order
+          const k = strokes().findIndex((o, j) => j !== w.i && ink.judge(o, path, w.level).ok);
+          if (k >= 0) {
+            other = k;
+            r.why = 'other';
+          }
+        }
+        w.lastWhy = r.why;
         w.events.push({ type: 'miss', i: w.i, why: r.why, other, missOn: w.missOn });
         // two misses on a stroke: it shows itself
         if (w.missOn % 2 === 0) w.hint(1, 'auto');

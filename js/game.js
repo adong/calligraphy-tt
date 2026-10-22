@@ -260,7 +260,8 @@
       const ch = BW.byChar[x.c];
       const m = document.createElement('div');
       m.className = 'mini';
-      m.innerHTML = `<b>${ch.c}</b><span class="p">${ch.py}</span><span class="s">${'⭐'.repeat(x.stars)}</span>${G.newOnes.has(x.c) ? `<span class="nw">${lang() === 'zh' ? '新' : 'NEW'}</span>` : ''}`;
+      m.setAttribute('data-no-lang', '');
+      m.innerHTML = `<b>${ch.c}</b><span class="p" data-no-lang>${ch.py}</span><span class="s">${'⭐'.repeat(x.stars)}</span>${G.newOnes.has(x.c) ? `<span class="nw">${lang() === 'zh' ? '新' : 'NEW'}</span>` : ''}`;
       ui.oWords.appendChild(m);
     }
   }
@@ -279,7 +280,7 @@
       ui.pic.classList.add('boing');
     }
     ui.cpy.textContent = ch.py;
-    ui.cmean.innerHTML = zh ? `<span class="w">${ch.word}</span><span class="wp">${ch.wpy}</span>` : ch.en;
+    ui.cmean.innerHTML = zh ? `<span class="w" data-no-lang>${ch.word}</span><span class="wp" data-no-lang>${ch.wpy}</span>` : `<span data-no-lang>${ch.en}</span>`;
     // the stroke-order steps
     const n = ch.s.length;
     const cw = G.lay ? G.lay.cardW : 240;

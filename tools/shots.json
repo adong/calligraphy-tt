@@ -1,0 +1,3 @@
+[
+  { "js": "game.home(); game.step(2.6); 'title'", "wait": 600, "shot": "screenshot" }
+]
